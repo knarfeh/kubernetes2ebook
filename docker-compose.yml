@@ -1,0 +1,18 @@
+version: '2'
+services:
+  kubernetes2ebook:
+    image: knarfeh/kubernetes2ebook
+    build:
+      context: .
+      dockerfile: ./.docker/dev/Dockerfile
+    # entrypoint: [sh]
+    command: ["go", "run", "main.go", "fetch"]
+    tty: true
+    volumes:
+      - .:/go/src/github.com/knarfeh/kubernetes2ebook/
+    environment:
+      - URL=https://kubernetes.io/blog/
+      - DAY_TIME_STAMP=2018-06-03
+      # - ES_HOST_PORT=http://elasticsearch:9200
+      - ES_HOST_PORT=http://192.168.199.121:9200
+      # - no_proxy=true
